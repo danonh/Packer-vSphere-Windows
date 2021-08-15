@@ -1,0 +1,59 @@
+{
+  "builders": [
+    {
+      "type": "vsphere-iso",
+
+      "vcenter_server": "vcsa01.lab.local",
+      "username": "packer@vsphere.local",
+      "password": "VMware1!",
+      "insecure_connection": "true",
+
+      "vm_name": "Windows2016-Template",
+      "folder": "Packer",
+      "datacenter": "DC01",
+
+      "cluster": "CL01",
+      "datastore": "DS-Intel-SSD",
+      "network_adapters": [
+        {
+          "network": "VMNetwork",
+          "network_card": "vmxnet3"
+        }
+      ],
+      "convert_to_template": "true",
+
+      "vm_version": "15",
+      "guest_os_type": "windows9Server64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "Admin",
+      "winrm_password": "VMware1!",
+
+      "CPUs": "2",
+      "CPU_hot_plug": "true",
+      "RAM": "4096",
+      "RAM_hot_plug": "true",
+      "RAM_reserve_all": false,
+      "firmware": "bios",
+
+      "disk_controller_type": "lsilogic-sas",
+      "storage": [
+        {
+          "disk_size": 40960,
+          "disk_thin_provisioned": true
+        }
+      ],
+      "ip_settle_timeout": "120s",
+
+      "iso_paths": [
+        "[DS-Intel-SSD] iso/en_windows_server_2016_vl_x64_dvd_11636701.iso",
+        "[DS-Intel-SSD] iso/VMwareTools_11_0_1.iso"
+      ],
+      "floppy_files": [
+        "Autounattend_Windows2016/autounattend.xml",
+        "scripts/winrm.ps1",
+        "scripts/vmtools.ps1"
+      ]
+    }
+  ]
+}
