@@ -1,0 +1,17 @@
+{
+  "vsphere_server": "vcsa01.lab.local",
+  "vsphere_user": "packer@vsphere.local",
+  "vsphere_password": "VMware1!",
+  "vsphere_folder": "Packer",
+  "vsphere_dc_name": "DC01",
+  "vsphere_cluster": "CL01",
+  "vsphere_host": "esx01.lab.local",
+  "vsphere_portgroup_name": "VMNetwork",
+  "vsphere_datastore": "DS-Intel-SSD",
+  "winadmin_password": "VMware1!",
+  "os_iso_path": "[DS-Intel-SSD] iso/en_windows_server_2016_vl_x64_dvd_11636701.iso",
+  "vmtools_iso_path": "[DS-Intel-SSD] iso/VMwareTools_11_0_1.iso",
+  "autounattend_path": "Autounattend_Windows2016",
+  "template_name": "Windows2016-Template",
+  "version": "15"
+}

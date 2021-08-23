@@ -1,0 +1,74 @@
+{
+  "variables": {
+    "vsphere_server": "",
+    "vsphere_user": "",
+    "vsphere_password": "",
+    "vsphere_folder": "",
+    "vsphere_dc_name": "",
+    "vsphere_cluster": "",
+    "vsphere_host": "",
+    "vsphere_portgroup_name": "",
+    "vsphere_datastore": "",
+    "winadmin_password": "",
+    "os_iso_path": "",
+    "vmtools_iso_path": "",
+    "autounattend_path": "",
+    "template_name": "",
+    "version": ""
+  },
+  "sensitive-variables": ["vsphere_password", "winadmin_password"],
+  "builders": [
+    {
+      "type": "vsphere-iso",
+
+      "vcenter_server": "{{user `vsphere_server`}}",
+      "username": "{{user `vsphere_user`}}",
+      "password": "{{user `vsphere_password`}}",
+      "insecure_connection": "true",
+
+      "vm_name": "{{user `template_name`}}",
+      "folder": "{{user `vsphere_folder`}}",
+      "datacenter": "{{user `vsphere_dc_name`}}",
+
+      "cluster": "{{user `vsphere_cluster`}}",
+      "host": "{{user `vsphere_host`}}",
+      "datastore": "{{user `vsphere_datastore`}}",
+      "network_adapters": [
+        {
+          "network": "{{user `vsphere_portgroup_name`}}",
+          "network_card": "vmxnet3"
+        }
+      ],
+      "convert_to_template": "true",
+
+      "vm_version": "{{user `version`}}",
+      "guest_os_type": "windows9Server64Guest",
+
+      "communicator": "winrm",
+      "winrm_username": "Admin",
+      "winrm_password": "{{user `winadmin_password`}}",
+
+      "CPUs": "2",
+      "CPU_hot_plug": "true",
+      "RAM": "4096",
+      "RAM_hot_plug": "true",
+      "RAM_reserve_all": false,
+      "firmware": "bios",
+
+      "disk_controller_type": "lsilogic-sas",
+      "storage": [
+        {
+          "disk_size": 40960,
+          "disk_thin_provisioned": true
+        }
+      ],
+
+      "iso_paths": ["{{user `os_iso_path`}}", "{{user `vmtools_iso_path`}}"],
+      "floppy_files": [
+        "{{user `autounattend_path`}}/autounattend.xml",
+        "scripts/winrm.ps1",
+        "scripts/vmtools.ps1"
+      ]
+    }
+  ]
+}
