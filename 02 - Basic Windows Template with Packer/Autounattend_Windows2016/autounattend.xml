@@ -69,8 +69,8 @@
                     <WillShowUI>OnError</WillShowUI>
                 </ProductKey>
                 <AcceptEula>true</AcceptEula>
-                <FullName>Ivanti</FullName>
-                <Organization>Ivanti</Organization>
+                <FullName>MyOrg</FullName>
+                <Organization>MyOrg</Organization>
             </UserData>
         </component>
     </settings>
